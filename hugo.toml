@@ -1,0 +1,39 @@
+baseURL = "https://placidex.github.io/"
+title = "Home Page - Placidex"
+author = "Krishna Padmasola"
+copyright = "Krishna Padmasola"
+paginate = 10
+languageCode = "en"
+# https://themes.gohugo.io/themes/hugo-theme-tailwind/
+theme = "tailwind"
+
+[params]
+  # dir name of your blog content (default is `content/posts`).
+  # the list of set content will show up on your index page (baseurl).
+  contentTypeName = "posts"
+
+  [params.header]
+    logo = "bamboo.webp"
+
+  [params.footer]
+    since = 2023
+    poweredby = true
+
+[menu]
+
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    pageRef = "/posts"
+    weight = 0
+
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    pageRef = "/about"
+    weight = 10
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+series = "series"

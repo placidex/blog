@@ -1,0 +1,48 @@
+name: Publish Site
+
+on:
+  push:
+    branches:
+      - main  # Set a branch name to trigger deployment
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.120.4'
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Checkout destination
+        uses: actions/checkout@master
+        with: 
+          repository: placidex/placidex.github.io
+          token: ${{ secrets.ACTIONS_TOKEN }}
+          path: ./placidex.github.io
+
+      - name: Copy generated files to destination
+        run: |
+          cp -R public/* ./placidex.github.io
+
+      - name: Commit and push changes in destination
+        run: |
+          cd ./placidex.github.io
+          git add .
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -m "Updated site"
+          git push
