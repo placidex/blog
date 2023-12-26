@@ -15,10 +15,6 @@ theme = "tailwind"
   [params.header]
     logo = "bamboo.webp"
 
-  [params.footer]
-    since = 2023
-    poweredby = true
-
 [menu]
 
   [[menu.main]]
@@ -31,9 +27,25 @@ theme = "tailwind"
     identifier = "about"
     name = "About"
     pageRef = "/about"
-    weight = 10
+    weight = 0
 
 [taxonomies]
 category = "categories"
 tag = "tags"
 series = "series"
+
+
+[social_media]
+
+  [[params.social_media.items]]
+    enabled = true
+    title = 'Github'
+    icon = 'brand-github'
+    link = 'https://github.com/placidex'
+
+  [[params.social_media.items]]
+    enabled = true
+    title = 'Twitter'
+    icon = 'brand-x'
+    link = 'https://twitter.com/placidex'
+
